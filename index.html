@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<title>DraftFut Dashboard</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: Arial;
+    background: #1f7a5a;
+    color: white;
+}
+
+.container {
+    padding: 20px;
+}
+
+h1 {
+    margin-bottom: 20px;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 10px;
+}
+
+.card {
+    padding: 15px;
+    border-radius: 10px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.vitoria { background: #22c55e; }
+.empate { background: #eab308; }
+.derrota { background: #ef4444; }
+
+.stats {
+    background: white;
+    color: black;
+    padding: 15px;
+    border-radius: 10px;
+    margin-top: 20px;
+}
+
+button {
+    margin-top: 20px;
+    padding: 12px 20px;
+    background: #facc15;
+    border: none;
+    border-radius: 10px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.ice-list {
+    margin-top: 20px;
+}
+</style>
+
+</head>
+<body>
+
+<div class="container">
+    <h1 id="titulo">Joinville - Últimos 10 Jogos</h1>
+
+    <div class="grid" id="jogos"></div>
+
+    <div id="stats" class="stats" style="display:none;"></div>
+
+    <button onclick="calcularICE()">Calcular ICE por jogo</button>
+
+    <div id="iceResultado" class="ice-list"></div>
+</div>
+
+<script>
+
+// ===============================
+// DADOS (SIMULANDO SUA API)
+// ===============================
+
+const jogos = [];
+
+// Aqui você pode substituir pelos dados da API depois
+fetch("http://127.0.0.1:8000/joinville")
+.then(res => res.json())
+.then(data => {
+    // Nome do time vindo da API
+    document.getElementById("titulo").innerText = data.time + " - Últimos 10 Jogos";
+
+    // Se quiser usar os jogos reais, adapte aqui
+})
+.catch(() => {
+    // fallback com dados mock
+    for (let i = 0; i < 10; i++) {
+        jogos.push({
+            adversario: "Time " + (i+1),
+            resultado: ["V","E","D"][i%3],
+            finalizacoes: Math.random()*20,
+            xg: Math.random()*2,
+            posse: Math.random()*100
+        });
+    }
+    renderJogos();
+});
+
+
+// ===============================
+// RENDER
+// ===============================
+
+function renderJogos() {
+    const container = document.getElementById("jogos");
+    container.innerHTML = "";
+
+    jogos.forEach((jogo, index) => {
+
+        let classe = 
+            jogo.resultado === "V" ? "vitoria" :
+            jogo.resultado === "E" ? "empate" : "derrota";
+
+        let div = document.createElement("div");
+        div.className = "card " + classe;
+
+        div.innerHTML = `
+            <p>${jogo.adversario}</p>
+            <strong>${jogo.resultado}</strong>
+        `;
+
+        div.onclick = () => mostrarStats(jogo);
+
+        container.appendChild(div);
+    });
+}
+
+// ===============================
+//  MOSTRAR STATS
+// ===============================
+
+function mostrarStats(jogo) {
+    const stats = document.getElementById("stats");
+    stats.style.display = "block";
+
+    stats.innerHTML = `
+        <h3>${jogo.adversario}</h3>
+        <p>Finalizações: ${jogo.finalizacoes}</p>
+        <p>xG: ${jogo.xg}</p>
+        <p>Posse: ${jogo.posse}%</p>
+    `;
+}
+
+// ===============================
+// ICE POR JOGO (SIMPLES)
+// ===============================
+
+function calcularICE() {
+
+    const resultadoDiv = document.getElementById("iceResultado");
+    resultadoDiv.innerHTML = "";
+
+    jogos.forEach((jogo, index) => {
+
+        // exemplo simples (depois liga com API)
+        let ice = (
+            (jogo.finalizacoes * 2) +
+            (jogo.xg * 30) +
+            (jogo.posse)
+        ) / 3;
+
+        if (ice > 100) ice = 100;
+        if (ice < 0) ice = 0;
+
+        let p = document.createElement("p");
+        p.innerText = `Jogo ${index+1}: ${ice.toFixed(2)}%`;
+
+        resultadoDiv.appendChild(p);
+    });
+}
+
+</script>
+
+</body>
+</html>
