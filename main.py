@@ -3,6 +3,7 @@
 # ================================
 
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware  # ← ADICIONAR ESTA
 from pydantic import BaseModel
 from typing import List
 from dados import jogos_joinville
@@ -12,6 +13,18 @@ from dados import jogos_joinville
 # ================================
 
 app = FastAPI()
+
+# ================================
+# CONFIGURAÇÃO CORS (ADICIONAR)
+# ================================
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # Permite todas as origens (apenas para desenvolvimento)
+    allow_credentials=True,
+    allow_methods=["*"],  # Permite todos os métodos (GET, POST, etc.)
+    allow_headers=["*"],  # Permite todos os headers
+)
 
 # ================================
 # LIMITES (MIN/MAX)
@@ -166,6 +179,7 @@ def analisar_joinville():
 
     return {
         "time": "Joinville EC",
+        "jogos": jogos_joinville,  # ← ADICIONAR ESTA LINHA
         "resultado": resultado
     }
 
