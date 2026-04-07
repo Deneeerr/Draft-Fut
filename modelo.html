@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DraftFut - Modelo Matemático ICE</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #0a0a0a;
+            color: #e5e5e5;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        /* Header */
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #2d5a2c 0%, #f5a623 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 10px;
+        }
+
+        .header h1 {
+            font-size: 2rem;
+            margin: 20px 0 10px;
+        }
+
+        .header p {
+            color: #888;
+        }
+
+        /* Botão voltar */
+        .btn-back {
+            display: inline-block;
+            background: #121212;
+            border: 1px solid #1f1f1f;
+            padding: 10px 24px;
+            border-radius: 50px;
+            color: #e5e5e5;
+            text-decoration: none;
+            margin-bottom: 30px;
+            transition: all 0.3s;
+        }
+
+        .btn-back:hover {
+            border-color: #2d5a2c;
+            color: #2d5a2c;
+        }
+
+        /* Cards */
+        .card {
+            background: #121212;
+            border: 1px solid #1f1f1f;
+            border-radius: 20px;
+            padding: 25px;
+            margin-bottom: 25px;
+        }
+
+        .card h2 {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .card h2 i {
+            color: #2d5a2c;
+        }
+
+        /* Fórmula */
+        .formula {
+            background: linear-gradient(135deg, rgba(45, 90, 44, 0.1) 0%, rgba(245, 166, 35, 0.05) 100%);
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+            font-size: 1.2rem;
+            font-weight: bold;
+            border-left: 4px solid #f5a623;
+        }
+
+        /* Grid dos pilares */
+        .pillars-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 25px;
+        }
+
+        .pillar-card {
+            background: #0d0d0d;
+            border: 1px solid #1f1f1f;
+            border-radius: 16px;
+            padding: 20px;
+            text-align: center;
+            transition: transform 0.3s;
+        }
+
+        .pillar-card:hover {
+            transform: translateY(-5px);
+            border-color: #2d5a2c;
+        }
+
+        .pillar-icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+
+        .pillar-card h3 {
+            margin-bottom: 10px;
+        }
+
+        .pillar-card .peso {
+            font-size: 0.8rem;
+            color: #f5a623;
+            margin-bottom: 10px;
+        }
+
+        .pillar-card p {
+            color: #888;
+            font-size: 0.85rem;
+        }
+
+        /* Tabela */
+        .table-wrapper {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #1f1f1f;
+        }
+
+        th {
+            background: rgba(45, 90, 44, 0.2);
+            color: #2d5a2c;
+        }
+
+        .note {
+            margin-top: 12px;
+            font-size: 0.8rem;
+            color: #f5a623;
+        }
+
+        /* Exemplo prático */
+        .example-box {
+            background: #0d0d0d;
+            border-radius: 12px;
+            padding: 20px;
+        }
+
+        .example-stats {
+            background: #0a0a0a;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 15px 0;
+            font-family: monospace;
+            font-size: 0.85rem;
+        }
+
+        .example-result {
+            background: linear-gradient(135deg, rgba(45, 90, 44, 0.1) 0%, rgba(245, 166, 35, 0.05) 100%);
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .final-ice {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #f5a623;
+            margin-top: 8px;
+        }
+
+        /* Lista de interpretação */
+        .interpretation-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .interp-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 10px;
+            background: #0d0d0d;
+            border-radius: 10px;
+        }
+
+        .interp-value {
+            font-weight: bold;
+            color: #f5a623;
+            min-width: 80px;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 30px;
+            color: #666;
+            font-size: 0.8rem;
+            border-top: 1px solid #1f1f1f;
+            margin-top: 40px;
+        }
+
+        /* Responsivo */
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+            
+            .header h1 {
+                font-size: 1.5rem;
+            }
+            
+            .formula {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Botão voltar -->
+        <a href="javascript:history.back()" class="btn-back">
+            <i class="fas fa-arrow-left"></i> Voltar ao Dashboard
+        </a>
+
+        <!-- Header -->
+        <div class="header">
+            <div class="logo">DRAFT<span style="color: #f5a623;">FUT</span></div>
+            <h1>📊 Modelo Matemático ICE</h1>
+            <p>Índice de Compatibilidade e Eficiência - Metodologia completa</p>
+        </div>
+
+        <!-- Fórmula Geral -->
+        <div class="card">
+            <h2><i class="fas fa-calculator"></i> Fórmula Geral</h2>
+            <div class="formula">
+                ICE = (35% × Conexão) + (25% × Eficiência) + (20% × Defesa) + (20% × Controle)
+            </div>
+            <p style="margin-top: 15px; color: #888;">O resultado final é limitado entre 0% e 100%.</p>
+        </div>
+
+        <!-- Os 4 Pilares -->
+        <div class="pillars-grid">
+            <div class="pillar-card">
+                <div class="pillar-icon">🔗</div>
+                <h3 style="color: #2d5a2c;">Conexão</h3>
+                <div class="peso">Peso: 35%</div>
+                <p>Média de: Chances Criadas, Assistências e Precisão de Passes</p>
+            </div>
+            <div class="pillar-card">
+                <div class="pillar-icon">⚡</div>
+                <h3 style="color: #f5a623;">Eficiência</h3>
+                <div class="peso">Peso: 25%</div>
+                <p>Média de: Finalizações, Finalizações no Alvo, xG e Gols Marcados</p>
+            </div>
+            <div class="pillar-card">
+                <div class="pillar-icon">🛡️</div>
+                <h3 style="color: #dc2626;">Defesa</h3>
+                <div class="peso">Peso: 20%</div>
+                <p>Média de: Desarmes, Interceptações e Gols Sofridos (invertido)</p>
+            </div>
+            <div class="pillar-card">
+                <div class="pillar-icon">🎮</div>
+                <h3 style="color: #3b82f6;">Controle</h3>
+                <div class="peso">Peso: 20%</div>
+                <p>Média de: Posse de Bola e Precisão de Passes</p>
+            </div>
+        </div>
+
+        <!-- Normalização -->
+        <div class="card">
+            <h2><i class="fas fa-chart-line"></i> Processo de Normalização</h2>
+            <div style="background: #0d0d0d; padding: 15px; border-radius: 12px; text-align: center; font-family: monospace; margin-bottom: 15px;">
+                Valor Normalizado = ((Valor - Mínimo) / (Máximo - Mínimo)) × 100
+            </div>
+            <h2> Processo de Normalização invertida</h2>
+            <div style="background: #0d0d0d; padding: 15px; border-radius: 12px; text-align: center; font-family: monospace; margin-bottom: 15px;">
+                Valor Final = 100 - Valor Normalizado
+            </div>
+            <p style="color: #888;">Todos os valores são limitados (clamp) entre 0 e 100. Para métricas onde valores menores são melhores (ex: gols sofridos), utiliza-se a <strong>normalização invertida</strong>.</p>
+        </div>
+
+        <!-- Tabela de Limites -->
+        <div class="card">
+            <h2><i class="fas fa-table"></i> Limites por Métrica</h2>
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr><th>Métrica</th><th>Mínimo</th><th>Máximo</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Finalizações</td><td>5</td><td>20</td></tr>
+                        <tr><td>Finalizações no Alvo</td><td>1</td><td>10</td></tr>
+                        <tr><td>xG (Expected Goals)</td><td>0.2</td><td>2.5</td></tr>
+                        <tr><td>Gols Marcados</td><td>0</td><td>5</td></tr>
+                        <tr><td>Desarmes</td><td>5</td><td>25</td></tr>
+                        <tr><td>Interceptações</td><td>5</td><td>20</td></tr>
+                        <tr><td>Gols Sofridos *</td><td>0</td><td>4</td></tr>
+                        <tr><td>Chances Criadas</td><td>0</td><td>6</td></tr>
+                        <tr><td>Assistências</td><td>0</td><td>3</td></tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="note">* Gols Sofridos utiliza normalização invertida (menos gols = melhor pontuação)</div>
+            <div class="note">*Indicadores baseados no padrão médio de jogo</div>
+        </div>
+
+        <!-- Exemplo Prático -->
+        <div class="card">
+            <h2><i class="fas fa-code-branch"></i> Exemplo Prático</h2>
+            <div class="example-box">
+                <h4>📊 Jogo: Joinville vs Carlos Renaux (Vitória)</h4>
+                <div class="example-stats">
+                    <div>📊 Finalizações: 13 | 🎯 No alvo: 5 | 📈 xG: 1.19 | ⚽ Gols: 3</div>
+                    <div>🛡️ Desarmes: 3 | ✋ Interceptações: 14 | 🎯 Gols Sofridos: 0</div>
+                    <div>💪 Posse: 60% | 🎯 Precisão Passes: 84.7%</div>
+                    <div>🎨 Chances Criadas: 5 | 🅰️ Assistências: 0</div>
+                </div>
+                <div class="example-result">
+                    <strong>Cálculo:</strong><br>
+                    🔗 Conexão: 56% | ⚡ Eficiência: 50% | 🛡️ Defesa: 53% | 🎮 Controle: 72%<br>
+                    <div class="final-ice">📈 ICE Final: 57%</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Interpretação dos Resultados -->
+        <div class="card">
+            <h2><i class="fas fa-chart-simple"></i> Interpretação dos Resultados</h2>
+            <div class="interpretation-list">
+                <div class="interp-item"><span class="interp-value">90-100%</span> Excelente - Performance de elite</div>
+                <div class="interp-item"><span class="interp-value">75-89%</span> Muito Bom - Acima da média</div>
+                <div class="interp-item"><span class="interp-value">60-74%</span> Bom - Performance sólida</div>
+                <div class="interp-item"><span class="interp-value">45-59%</span> Regular - Pontos a melhorar</div>
+                <div class="interp-item"><span class="interp-value">0-44%</span> Baixo - Necessita ajustes</div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <p>DraftFut Analytics Platform © 2025 | Modelo ICE v1.0</p>
+        </div>
+    </div>
+</body>
+</html>

@@ -11,6 +11,78 @@
             overflow-x: hidden;
         }
 
+    /* ================================
+    VARIÁVEIS DE TEMA (CLARO/ESCURO)
+    ================================ */
+:root {
+    /* Tema Escuro (padrão) */
+    --bg-primary: #0a0a0a;
+    --bg-secondary: #121212;
+    --bg-card: #121212;
+    --bg-hover: #161616;
+    --text-primary: #e5e5e5;
+    --text-secondary: #888;
+    --border-color: #1f1f1f;
+    --sidebar-bg: linear-gradient(180deg, #0f0f0f 0%, #0a0a0a 100%);
+    --indicator-bg: linear-gradient(135deg, #121212 0%, #0d0d0d 100%);
+    --modal-bg: #121212;
+}
+
+[data-theme="light"] {
+    /* Tema Claro */
+    --bg-primary: #f5f5f5;
+    --bg-secondary: #ffffff;
+    --bg-card: #ffffff;
+    --bg-hover: #f0f0f0;
+    --text-primary: #1a1a1a;
+    --text-secondary: #666;
+    --border-color: #e0e0e0;
+    --sidebar-bg: linear-gradient(180deg, #f8f8f8 0%, #f5f5f5 100%);
+    --indicator-bg: linear-gradient(135deg, #ffffff 0%, #f8f8f8 100%);
+    --modal-bg: #ffffff;
+}
+
+body {
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.sidebar {
+    background: var(--sidebar-bg);
+    border-right-color: var(--border-color);
+}
+
+.game-card, .indicator-card, .ice-results, .future-item {
+    background: var(--bg-card);
+    border-color: var(--border-color);
+}
+
+.game-card:hover {
+    background: var(--bg-hover);
+}
+
+.search-bar, .modal-content {
+    background: var(--bg-secondary);
+    border-color: var(--border-color);
+}
+
+.search-bar input {
+    color: var(--text-primary);
+}
+
+.indicator-title, .section-title, .ice-label {
+    color: var(--text-secondary);
+}
+
+.indicator-value {
+    color: var(--text-primary);
+}
+
+.ice-item, .category-card, .detail-stat {
+    background: var(--bg-hover);
+}
+
         /* ================================
            SCROLLBAR PERSONALIZADA
         ================================ */
@@ -440,7 +512,8 @@
         }
 
         .ice-item {
-            display: flex;
+            display: grid;
+            grid-template-columns: 290px 1fr 300px 60px;
             justify-content: space-between;
             align-items: center;
             padding: 12px 16px;
