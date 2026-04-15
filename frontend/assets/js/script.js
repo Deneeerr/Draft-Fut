@@ -165,12 +165,19 @@ function calcularTodosICE() {
 
     container.innerHTML = `
         <div class="ice-list">
-            ${icePorJogo.map((item, idx) => `
-                <div class="ice-item" onclick="abrirModal(${idx})">
-                    <span>#${idx + 1}</span>
-                    <span>${Math.round(item.ice)}%</span>
+            ${icePorJogo.map((item, idx) => {
+                const iceFinal = Math.round(item.ice);
+                return `
+                <div class="ice-item" onclick="abrirModal(${idx})" style="display: flex; align-items: center; gap: 15px; margin-bottom: 10px; cursor: pointer;">
+                    <span style="min-width: 30px;">#${idx + 1}</span>
+                    
+                    <div class="ice-bar-track" style="flex-grow: 1; height: 8px; background: rgba(255,255,255,0.1); border-radius: 4px; overflow: hidden;">
+                        <div class="ice-bar-fill" style="width: ${iceFinal}%; height: 100%; background: #f5a623; border-radius: 4px; transition: width 0.5s ease;"></div>
+                    </div>
+
+                    <span style="min-width: 45px; text-align: right; font-weight: bold;">${iceFinal}%</span>
                 </div>
-            `).join('')}
+            `}).join('')}
         </div>
     `;
 }
