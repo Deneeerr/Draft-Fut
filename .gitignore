@@ -1,16 +1,21 @@
 # Ambiente virtual
 venv/
 
-# Cache do Python
+# Python
 __pycache__/
 *.pyc
-
-# Arquivos do sistema
-.DS_Store
-Thumbs.db
-
-# VSCode (opcional)
-.vscode/
+*.pyo
+*.pyd
 
 # Logs
 *.log
+
+# Sistema
+.DS_Store
+Thumbs.db
+
+# VSCode
+.vscode/
+
+# Variáveis de ambiente
+.env

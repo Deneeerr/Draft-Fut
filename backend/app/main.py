@@ -6,7 +6,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware  # ← ADICIONAR ESTA
 from pydantic import BaseModel
 from typing import List
-from dados import jogos_joinville
+from app.dados import jogos_joinville
 
 # ================================
 # CRIAÇÃO DA API

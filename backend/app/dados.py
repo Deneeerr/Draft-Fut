@@ -1,3 +1,27 @@
+jogadores = [
+    {
+        "nome": "Ytalo",
+        "posicao": "Atacante",
+        "posicao_detalhada": "Centroavante",
+        "time_atual": "ABC",
+        "idade": 38,
+        "liga": "Série D",
+
+        "finalizacoes": 16,
+        "finalizacoes_no_alvo": 5,
+        "xg": 0.30,
+        "gols": 1,
+        
+        "chances_criadas": 9,
+        "assistencias": 0,
+        "passes_certos": 75,
+        "total_passes": 88,
+        
+        "desarmes":5,
+        "interceptações":0
+    },
+]
+
 jogos_joinville = [
     {
         "finalizacoes": 16,
