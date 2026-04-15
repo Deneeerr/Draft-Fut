@@ -1,7 +1,7 @@
 // ==========================================
 // CONFIGURAÇÕES E LIMITES
 // ==========================================
-const API_URL = "http://127.0.0.1:8000/joinville";
+const API_URL = "https://draftfut-api.onrender.com/joinville";
 
 const LIMITES = {
     finalizacoes: [5, 20],
