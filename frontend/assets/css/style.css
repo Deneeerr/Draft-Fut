@@ -744,3 +744,108 @@ body {
             padding: 40px;
             color: #666;
         }
+
+
+/* ================================
+   MODAL - ICE + PILARES + STATS
+================================ */
+
+/* ICE principal */
+.modal-ice {
+    font-size: 3rem;
+    font-weight: 800;
+    color: #f5a623;
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+/* PILARES */
+.pilares {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin-bottom: 25px;
+}
+
+.pilar {
+    background: var(--bg-hover);
+    border: 1px solid var(--border-color);
+    padding: 12px;
+    border-radius: 12px;
+    text-align: center;
+    transition: all 0.3s;
+}
+
+.pilar:hover {
+    transform: translateY(-2px);
+    border-color: #f5a623;
+}
+
+.pilar span {
+    font-size: 0.7rem;
+    color: var(--text-secondary);
+    display: block;
+}
+
+.pilar strong {
+    font-size: 1.1rem;
+    color: #f5a623;
+    display: block;
+    margin-top: 5px;
+}
+
+/* GRID DE STATS */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+}
+
+/* CARD INDIVIDUAL */
+.stat-card {
+    background: var(--bg-hover);
+    border: 1px solid var(--border-color);
+    padding: 12px;
+    border-radius: 12px;
+    text-align: center;
+    transition: all 0.3s;
+}
+
+.stat-card:hover {
+    transform: scale(1.03);
+    border-color: #2d5a2c;
+}
+
+/* TEXTO */
+.stat-card span {
+    font-size: 0.7rem;
+    color: var(--text-secondary);
+}
+
+.stat-card strong {
+    display: block;
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-top: 5px;
+    color: var(--text-primary);
+}
+
+/* ================================
+   RESPONSIVIDADE DO MODAL
+================================ */
+
+@media (max-width: 768px) {
+    .pilares {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 480px) {
+    .stats-grid {
+        grid-template-columns: 1fr;
+    }
+}

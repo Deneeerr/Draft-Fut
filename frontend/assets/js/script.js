@@ -165,22 +165,104 @@ function calcularTodosICE() {
 
     container.innerHTML = `
         <div class="ice-list">
-            ${icePorJogo.map((item, idx) => `
-                <div class="ice-item" onclick="abrirModal(${idx})">
-                    <span>#${idx + 1}</span>
-                    <span>${Math.round(item.ice)}%</span>
+            ${icePorJogo.map((item, idx) => {
+                const iceFinal = Math.round(item.ice);
+                return `
+                <div class="ice-item" onclick="abrirModal(${idx})" style="display: flex; align-items: center; gap: 15px; margin-bottom: 10px; cursor: pointer;">
+                    <span style="min-width: 30px;">#${idx + 1}</span>
+                    
+                    <div class="ice-bar-track" style="flex-grow: 1; height: 8px; background: rgba(255,255,255,0.1); border-radius: 4px; overflow: hidden;">
+                        <div class="ice-bar-fill" style="width: ${iceFinal}%; height: 100%; background: #f5a623; border-radius: 4px; transition: width 0.5s ease;"></div>
+                    </div>
+
+                    <span style="min-width: 45px; text-align: right; font-weight: bold;">${iceFinal}%</span>
                 </div>
-            `).join('')}
+            `}).join('')}
         </div>
     `;
 }
 
 function abrirModal(index) {
     const jogo = jogosData[index];
-    const ice = calcularICEUnico(jogo);
+    const calc = calcularICEUnico(jogo);
+
+    const pct = passesPct(jogo.passes_certos, jogo.total_passes);
 
     document.getElementById('modal-title').innerHTML = `vs ${jogo.adversario}`;
-    document.getElementById('modal-body').innerHTML = `${Math.round(ice.ice)}%`;
+
+    document.getElementById('modal-body').innerHTML = `
+        <div class="modal-ice">${Math.round(calc.ice)}%</div>
+
+        <div class="pilares">
+            <div class="pilar">
+                <span>Conexão</span>
+                <strong>${Math.round(calc.conexao)}%</strong>
+            </div>
+            <div class="pilar">
+                <span>Eficiência</span>
+                <strong>${Math.round(calc.eficiencia)}%</strong>
+            </div>
+            <div class="pilar">
+                <span>Defesa</span>
+                <strong>${Math.round(calc.defesa)}%</strong>
+            </div>
+            <div class="pilar">
+                <span>Controle</span>
+                <strong>${Math.round(calc.controle)}%</strong>
+            </div>
+        </div>
+
+        <div class="stats-grid">
+            <div class="stat-card">
+                <span>Finalizações</span>
+                <strong>${jogo.finalizacoes}</strong>
+            </div>
+            <div class="stat-card">
+                <span>No alvo</span>
+                <strong>${jogo.finalizacoes_no_alvo}</strong>
+            </div>
+            <div class="stat-card">
+                <span>xG</span>
+                <strong>${jogo.xg}</strong>
+            </div>
+            <div class="stat-card">
+                <span>Gols</span>
+                <strong>${jogo.gols_marcados}</strong>
+            </div>
+
+            <div class="stat-card">
+                <span>Desarmes</span>
+                <strong>${jogo.desarmes}</strong>
+            </div>
+            <div class="stat-card">
+                <span>Interceptações</span>
+                <strong>${jogo.interceptacoes}</strong>
+            </div>
+            <div class="stat-card">
+                <span>Gols sofridos</span>
+                <strong>${jogo.gols_sofridos}</strong>
+            </div>
+
+            <div class="stat-card">
+                <span>Posse</span>
+                <strong>${jogo.posse_bola}%</strong>
+            </div>
+            <div class="stat-card">
+                <span>Passes certos</span>
+                <strong>${pct.toFixed(1)}%</strong>
+            </div>
+
+            <div class="stat-card">
+                <span>Chances criadas</span>
+                <strong>${jogo.chances_criadas}</strong>
+            </div>
+            <div class="stat-card">
+                <span>Assistências</span>
+                <strong>${jogo.assistencias}</strong>
+            </div>
+        </div>
+    `;
+
     document.getElementById('modal').style.display = 'block';
 }
 
