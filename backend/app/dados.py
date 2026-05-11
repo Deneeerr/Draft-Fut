@@ -15,10 +15,226 @@ jogadores = [
         "chances_criadas": 9,
         "assistencias": 0,
         "passes_certos": 75,
-        "total_passes": 88,
         
         "desarmes":5,
         "interceptações":0
+    },
+    
+    {
+        "nome": "Erverson",
+        "posicao": "Atacante",
+        "posicao_detalhada": "Centroavante",
+        "time_atual": "Carlos Renaux",
+        "idade": 28,
+        "liga": "Série D",
+
+        "finalizacoes": 21,
+        "finalizacoes_no_alvo": 7,
+        "xg": 3.33,
+        "gols": 3,
+        
+        "chances_criadas": 3,
+        "assistencias": 1,
+        "passes_certos": 67.3,
+        
+        "desarmes":4,
+        "interceptações":2
+    },
+    
+    {
+        "nome": "Garrinsha",
+        "posicao": "Atacante",
+        "posicao_detalhada": "Ponta Esquerda",
+        "time_atual": "Bangu",
+        "idade": 21,
+        "liga": "Série D",
+
+        "finalizacoes": 8,
+        "finalizacoes_no_alvo": 1,
+        "xg": 0.05,
+        "gols": 1,
+        
+        "chances_criadas": 1,
+        "assistencias": 1,
+        "passes_certos": 69.9,
+        
+        "desarmes":8,
+        "interceptações":5
+    },
+    
+    {
+        "nome": "Luizinho",
+        "posicao": "Atacante",
+        "posicao_detalhada": "Ponta Direita",
+        "time_atual": "Brusque",
+        "idade": 29,
+        "liga": "Série D",
+
+        "finalizacoes": 6,
+        "finalizacoes_no_alvo": 2,
+        "xg": 0.24,
+        "gols": 2,
+        
+        "chances_criadas": 0,
+        "assistencias": 0,
+        "passes_certos": 71.0,
+        
+        "desarmes":1,
+        "interceptações":1
+    },
+    
+    {
+        "nome": "Felipe Pará",
+        "posicao": "Meio-campista",
+        "posicao_detalhada": "Meia Central",
+        "time_atual": "ND Primorje",
+        "idade": 24,
+        "liga": "Série D",
+
+        "finalizacoes": 3,
+        "finalizacoes_no_alvo": 1,
+        "xg": 0.04,
+        "gols": 0,
+        
+        "chances_criadas": 0,
+        "assistencias": 0,
+        "xa":0.00,
+        "passes_certos": 88.8,
+        
+        "desarmes":1,
+        "interceptações":6
+    },
+    
+    {
+        "nome": "Thomaz Carvalho",
+        "posicao": "Meio-campista",
+        "posicao_detalhada": "Meia Central",
+        "time_atual": "São José EC",
+        "idade": 24,
+        "liga": "Série D",
+
+        "finalizacoes": 36,
+        "finalizacoes_no_alvo": 15,
+        "xg": 1.71,
+        "gols": 1,
+        
+        "chances_criadas": 1,
+        "assistencias": 2,
+        "xa":2.96,
+        "passes_certos": 76.6,
+        
+        "desarmes":7,
+        "interceptações":27
+    },
+    
+    {
+        "nome": "Bruno Camilo",
+        "posicao": "Meio-campista",
+        "posicao_detalhada": "Volante",
+        "time_atual": "Goiatuba",
+        "idade": 28,
+        "liga": "Série D",
+
+        "gols": 1,
+        
+        "chances_criadas": 0,
+        "assistencias": 0,
+        "xa":0.21,
+        "passes_certos": 88.7,
+        
+        "desarmes":1,
+        "interceptações":4
+    },
+    
+     {
+        "nome": "Fernando Neto",
+        "posicao": "Meio-campista",
+        "posicao_detalhada": "Volante",
+        "time_atual": "Amazonas FC",
+        "idade": 33,
+        "liga": "Série D",
+
+        "gols": 1,
+        
+        "chances_criadas": 1,
+        "assistencias": 1,
+        "xa":0.30,
+        "passes_certos": 77.5,
+        
+        "desarmes":1,
+        "interceptações":1
+    },
+     
+     {
+        "nome": "Léo Rigo",
+        "posicao": "Defensor",
+        "posicao_detalhada": "Zagueiro",
+        "time_atual": "São José EC",
+        "idade": 31,
+        "liga": "Série D",
+
+        "gols": 0,
+        
+        "passes_certos": 87.3,
+        
+        "desarmes":0,
+        "interceptações":19,
+        "chutes_bloqueados": 9
+        
+    },
+     
+    {
+        "nome": "Pedro Botelho",
+        "posicao": "Defensor",
+        "posicao_detalhada": "Zagueiro",
+        "time_atual": "Jatuiense",
+        "idade": 36,
+        "liga": "Série D",
+
+        "gols": 0,
+        
+        "passes_certos": 87.4,
+        
+        "desarmes":5,
+        "interceptações":17,
+        "chutes_bloqueados": 7
+        
+    },
+    
+    {
+        "nome": "Fernando Neto",
+        "posicao": "Defensor",
+        "posicao_detalhada": "Lateral Esquerdo",
+        "time_atual": "Avai",
+        "idade": 35,
+        "liga": "Série D",
+
+        "finalizacoes_no_alvo": 1,
+        "assistencias": 0,
+        
+        "chances_criadas": 1,
+        "passes_certos": 75.4,
+        
+        "desarmes":2,
+        "interceptações":14
+    },
+    
+    {
+        "nome": "Toty",
+        "posicao": "Defensor",
+        "posicao_detalhada": "Lateral Direito",
+        "time_atual": "Santa Cruz",
+        "idade": 35,
+        "liga": "Série D",
+
+        "finalizacoes_no_alvo": 2,
+        "assistencias": 0,
+        
+        "chances_criadas": 0,
+        "passes_certos": 81.9,
+        
+        "desarmes":3,
+        "interceptações":11
     },
 ]
 
