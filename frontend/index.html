@@ -11,52 +11,54 @@
 <body>
     <div class="app-container">
         <!-- SIDEBAR -->
-        <aside class="sidebar">
+       <aside class="sidebar">
             <div class="logo-area">
                 <div class="logo">DRAFT<span style="color:#f5a623">FUT</span></div>
                 <div class="logo-sub">Analytics Platform</div>
             </div>
             
             <nav class="sidebar-nav">
-                <div class="nav-item active">
+                <div class="nav-item active" onclick="window.location.href='index.html'">
                     <i class="fas fa-chart-line"></i>
                     <span>Dashboard</span>
                 </div>
-                <div class="nav-item active">
-                <a href="modelo.html" class="nav-item">
-                    <i class="fas fa-square-root-variable"></i> <span>Como funciona</span>
-                </a>
+                
+                <div class="nav-item" onclick="window.location.href='modelo.html'">
+                    <i class="fas fa-square-root-variable"></i>
+                    <span>Como funciona</span>
                 </div>
-                <div class="nav-item">
+                
+                <div class="nav-item" onclick="window.location.href='index.html'">
                     <i class="fas fa-futbol"></i>
                     <span>Jogos</span>
                 </div>
+                
                 <div class="nav-item">
                     <i class="fas fa-chart-pie"></i>
                     <span>Estatísticas</span>
                 </div>
-                <div class="nav-item">
-                    <i class="fas fa-robot"></i>
+
+                <div class="nav-item" onclick="window.location.href='scouting.html'">
+                    <i class="fa-solid fa-microchip"></i>
                     <span>ICE Analytics</span>
                 </div>
-            </nav>
 
-            <!-- Espaço para recursos futuros -->
-            <div class="future-section">
-                <h4><i class="fas fa-microchip"></i> EM BREVE</h4>
-                <div class="future-item">
-                    <i class="fas fa-chart-simple"></i> Gráficos Avançados
+                <div class="future-section">
+                    <h4><i class="fas fa-microchip"></i> EM BREVE</h4>
+                    <div class="nav-item muted">
+                        <i class="fas fa-chart-simple"></i>
+                        <span>Gráficos Avançados</span>
+                    </div>
+                    <div class="nav-item muted">
+                        <i class="fas fa-users"></i>
+                        <span>Simulação de Jogadores</span>
+                    </div>
+                    <div class="nav-item muted">
+                        <i class="fas fa-brain"></i>
+                        <span>Previsões IA</span>
+                    </div>
                 </div>
-                <div class="future-item">
-                    <i class="fas fa-users"></i> Simulação de Jogadores
-                </div>
-                <div class="future-item">
-                    <i class="fas fa-chart-scatter"></i> Comparação ML(Machine Learning)
-                </div>
-                <div class="future-item">
-                    <i class="fas fa-brain"></i> Previsões IA
-                </div>
-            </div>
+            </nav>
         </aside>
 
         <!-- CONTEÚDO PRINCIPAL -->

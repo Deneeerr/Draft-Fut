@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DRAFT-FUT | Scouting de Mercado</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/scouting.css">
+</head>
+<body>
+
+    <div class="app-container">
+        <aside class="sidebar">
+            <div class="logo-area">
+                <div class="logo">DRAFTFUT</div>
+                <div class="logo-sub">Analytics Platform</div>
+            </div>
+
+            <nav class="sidebar-nav">
+                <div class="nav-item" onclick="window.location.href='index.html'">
+                    <i class="fa-solid fa-chart-line"></i>
+                    <span>Dashboard</span>
+                </div>
+                <div class="nav-item" onclick="window.location.href='modelo.html'">
+                    <i class="fa-solid fa-square-root-variable"></i>
+                    <span>Como funciona</span>
+                </div>
+                <div class="nav-item" onclick="window.location.href='index.html'">
+                    <i class="fa-solid fa-soccer-ball"></i>
+                    <span>Jogos</span>
+                </div>
+                <div class="nav-item">
+                    <i class="fa-solid fa-chart-pie"></i>
+                    <span>Estatísticas</span>
+                </div>
+                <div class="nav-item active">
+                    <i class="fa-solid fa-microchip"></i>
+                    <span>ICE Analytics</span>
+                </div>
+
+                <div class="future-section">
+                    <h4>Em Breve</h4>
+                    <div class="nav-item muted"><i class="fa-solid fa-chart-area"></i><span>Gráficos Avançados</span></div>
+                    <div class="nav-item muted"><i class="fa-solid fa-users-gear"></i><span>Simulação de Jogadores</span></div>
+                    <div class="nav-item muted"><i class="fa-solid fa-brain"></i><span>Previsões IA</span></div>
+                </div>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+            <header class="header">
+                <div class="team-info">
+                    <h1>Joinville EC</h1>
+                    <div class="team-meta">
+                        <span><i class="fa-solid fa-trophy"></i> Campeonato Catarinense</span>
+                        <span><i class="fa-solid fa-location-dot"></i> Santa Catarina, Brasil</span>
+                        <span><i class="fa-solid fa-calendar"></i> Temporada 2026</span>
+                    </div>
+                </div>
+
+                <div class="search-bar">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <input type="text" placeholder="Buscar jogador ou posição...">
+                </div>
+            </header>
+
+            <div class="indicators-grid">
+                <div class="indicator-card">
+                    <div class="indicator-title">ICE MÉDIO ATUAL</div>
+                    <div id="ice-atual-valor" class="indicator-value">--</div>
+                    <div class="indicator-trend"><i class="fa-solid fa-chart-simple"></i> Índice de Compatibilidade</div>
+                </div>
+                <div class="indicator-card">
+                    <div class="indicator-title">JOGADORES ANALISADOS</div>
+                    <div id="total-jogadores" class="indicator-value">0</div>
+                    <div class="indicator-trend text-warning">Mercado Aberto</div>
+                </div>
+            </div>
+
+            <h3 class="section-title"><i class="fa-solid fa-users-rectangle"></i> Recomendações de Mercado</h3>
+            
+            <div id="container-scouting" class="games-grid">
+                <div class="loading">
+                    <i class="fa-solid fa-circle-notch fa-spin"></i> Processando análise tática...
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        async function carregarScouting() {
+            const container = document.getElementById('container-scouting');
+            try {
+                const response = await fetch('http://127.0.0.1:8000/simular-impacto');
+                const data = await response.json();
+
+                document.getElementById('ice-atual-valor').innerText = data.ice_atual;
+                document.getElementById('total-jogadores').innerText = data.recomendacoes.length;
+
+                container.innerHTML = '';
+                data.recomendacoes.forEach(player => {
+                    // Mapeia o status para a classe CSS do seu style.css
+                    const statusClass = player.status === 'positivo' ? 'vitoria' : 
+                                       player.status === 'negativo' ? 'derrota' : 'empate';
+                    
+                    const badgeClass = player.status === 'positivo' ? 'V' : 
+                                      player.status === 'negativo' ? 'D' : 'E';
+
+                    container.innerHTML += `
+                        <div class="game-card ${statusClass}">
+                            <div class="game-header">
+                                <div class="adversario">${player.nome}</div>
+                                <div class="resultado-badge ${badgeClass}">${player.status.toUpperCase()}</div>
+                            </div>
+                            
+                            <div class="team-meta mb-2" style="font-size: 0.75rem;">
+                                <span>${player.posicao} | ${player.time}</span>
+                            </div>
+
+                            <div class="game-stats-preview">
+                                <div class="preview-stat">
+                                    <div class="label">IIP</div>
+                                    <div class="value">${player.iip}</div>
+                                </div>
+                                <div class="preview-stat">
+                                    <div class="label">IMPACTO</div>
+                                    <div class="value" style="color: ${player.diferenca > 0 ? '#2d5a2c' : '#dc2626'}">
+                                        ${player.diferenca > 0 ? '+' : ''}${player.diferenca}
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="ice-preview">
+                                <span class="ice-label">ICE AJUSTADO</span>
+                                <span class="ice-value">${player.ice_ajustado}</span>
+                            </div>
+                            
+                            <div class="mt-2 text-center">
+                                <small style="color: #666; font-size: 0.7rem;">${player.classificacao}</small>
+                            </div>
+                        </div>
+                    `;
+                });
+            } catch (error) {
+                container.innerHTML = '<div class="empty-state">Erro ao conectar com a API do Backend.</div>';
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', carregarScouting);
+    </script>
+</body>
+</html>
