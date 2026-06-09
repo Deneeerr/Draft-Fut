@@ -92,7 +92,7 @@
         async function carregarScouting() {
             const container = document.getElementById('container-scouting');
             try {
-                const response = await fetch('http://127.0.0.1:8000/simular-impacto');
+                const response = await fetch('https://draftfut-api.onrender.com/simular-impacto');
                 const data = await response.json();
 
                 document.getElementById('ice-atual-valor').innerText = data.ice_atual;
