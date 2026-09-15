@@ -3,149 +3,177 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DraftFut - Dashboard de Análise Esportiva</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+    <title>DraftFut - Dashboard</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- CSS compartilhado por todas as páginas -->
     <link rel="stylesheet" href="assets/css/style.css">
+    <!-- CSS exclusivo do Dashboard -->
+    <link rel="stylesheet" href="assets/css/dashboard.css">
 </head>
 <body>
-    <div class="app-container">
-        <!-- SIDEBAR -->
-       <aside class="sidebar">
-            <div class="logo-area">
-                <div class="logo">DRAFT<span style="color:#f5a623">FUT</span></div>
-                <div class="logo-sub">Analytics Platform</div>
-            </div>
-            
-            <nav class="sidebar-nav">
-                <div class="nav-item active" onclick="window.location.href='index.html'">
-                    <i class="fas fa-chart-line"></i>
-                    <span>Dashboard</span>
-                </div>
-                
-                <div class="nav-item" onclick="window.location.href='modelo.html'">
-                    <i class="fas fa-square-root-variable"></i>
-                    <span>Como funciona</span>
-                </div>
-                
-                <div class="nav-item" onclick="window.location.href='index.html'">
-                    <i class="fas fa-futbol"></i>
-                    <span>Jogos</span>
-                </div>
-                
-                <div class="nav-item">
-                    <i class="fas fa-chart-pie"></i>
-                    <span>Estatísticas</span>
-                </div>
-
-                <div class="nav-item" onclick="window.location.href='scouting.html'">
-                    <i class="fa-solid fa-microchip"></i>
-                    <span>ICE Analytics</span>
-                </div>
-
-                <div class="future-section">
-                    <h4><i class="fas fa-microchip"></i> EM BREVE</h4>
-                    <div class="nav-item muted">
-                        <i class="fas fa-chart-simple"></i>
-                        <span>Gráficos Avançados</span>
-                    </div>
-                    <div class="nav-item muted">
-                        <i class="fas fa-users"></i>
-                        <span>Simulação de Jogadores</span>
-                    </div>
-                    <div class="nav-item muted">
-                        <i class="fas fa-brain"></i>
-                        <span>Previsões IA</span>
-                    </div>
-                </div>
-            </nav>
-        </aside>
-
-        <!-- CONTEÚDO PRINCIPAL -->
-        <main class="main-content">
-            <!-- HEADER -->
-            <div class="header">
-                <div class="team-info">
-                    <h1 id="team-name">Joinville EC</h1>
-                    <div class="team-meta">
-                        <span><i class="fas fa-trophy"></i> Campeonato Catarinense</span>
-                        <span><i class="fas fa-map-marker-alt"></i> Santa Catarina, Brasil</span>
-                        <span><i class="fas fa-calendar"></i> Temporada 2026</span>
-                    </div>
-                </div>
-                <div class="search-bar">
-                    <i class="fas fa-search"></i>
-                    <input type="text" placeholder="Buscar jogador, time ou jogo...">
-                    <i class="fas fa-sliders-h"></i>
-                </div>
-            </div> 
-
-            <!-- INDICADORES -->
-            <div class="indicators-grid">
-                <div class="indicator-card">
-                    <div class="indicator-title">ICE MÉDIO</div>
-                    <div class="indicator-value" id="ice-medio">--<span class="indicator-unit">%</span></div>
-                    <div class="indicator-trend"><i class="fas fa-chart-line"></i> Índice de Compatibilidade</div>
-                </div>
-                <div class="indicator-card">
-                    <div class="indicator-title">ÚLTIMOS 10 JOGOS</div>
-                    <div class="indicator-value" id="jogos-count">--</div>
-                    <div class="indicator-trend" id="record-stats">--</div>
-                </div>
-                <div class="indicator-card">
-                    <div class="indicator-title">MÉDIA DE GOLS</div>
-                    <div class="indicator-value" id="media-gols">--<span class="indicator-unit">/jogo</span></div>
-                    <div class="indicator-trend"><i class="fas fa-futbol"></i> Eficiência Ofensiva</div>
-                </div>
-                <div class="indicator-card">
-                    <div class="indicator-title">POSSE MÉDIA</div>
-                    <div class="indicator-value" id="media-posse">--<span class="indicator-unit">%</span></div>
-                    <div class="indicator-trend"><i class="fas fa-chart-simple"></i> Controle de Jogo</div>
-                </div>
-            </div>
-
-            <!-- ÚLTIMOS JOGOS -->
-            <div class="section-title">
-                <i class="fas fa-calendar-week"></i>
-                Últimos 10 Jogos
-            </div>
-            <div id="games-container" class="games-grid">
-                <div class="loading"><i class="fas fa-spinner fa-pulse"></i> Carregando jogos...</div>
-            </div>
-
-            <!-- RESULTADOS ICE -->
-            <div class="ice-results">
-                <div class="ice-header">
-                    <div class="section-title" style="margin-bottom: 0;">
-                        <i class="fas fa-chart-simple"></i>
-                        Índice ICE por Jogo
-                    </div>
-                    <button class="btn-calculate" id="calc-ice-btn">
-                        <i class="fas fa-calculator"></i> Calcular ICE
-                    </button>
-                </div>
-                <div id="ice-list-container">
-                    <div class="empty-state">
-                        <i class="fas fa-chart-line" style="font-size: 2rem; opacity: 0.5;"></i>
-                        <p>Clique em "Calcular ICE" para visualizar o índice de cada jogo</p>
-                    </div>
-                </div>
-            </div>
-        </main>
-    </div>
-
-    <!-- MODAL DE DETALHES -->
-    <div id="modal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2 id="modal-title">Detalhes do Jogo</h2>
-                <span class="close-modal" onclick="fecharModal()">&times;</span>
-            </div>
-            <div class="modal-body" id="modal-body">
-                <!-- Conteúdo dinâmico -->
-            </div>
+<div class="app-container">
+    <aside class="sidebar">
+        <div class="logo-area">
+            <div class="logo">DRAFT<span style="color:#f5a623">FUT</span></div>
+            <div class="logo-sub">Analytics Platform</div>
         </div>
-    </div>
-    <script src="assets/js/script.js" defer></script>
+
+        <nav class="sidebar-nav">
+            <div class="nav-item active" onclick="window.location.href='index.html'">
+                <i class="fas fa-chart-line"></i><span>Dashboard</span>
+            </div>
+            <div class="nav-item" onclick="window.location.href='modelo.html'">
+                <i class="fas fa-square-root-variable"></i><span>Como funciona</span>
+            </div>
+            <div class="nav-item" onclick="window.location.href='jogo.html'">
+                <i class="fas fa-futbol"></i><span>Jogos</span>
+            </div>
+            <div class="nav-item" onclick="window.location.href='estatisticas.html'">
+                <i class="fas fa-chart-pie"></i><span>Estatísticas</span>
+            </div>
+            <div class="nav-item" onclick="window.location.href='scouting.html'">
+                <i class="fa-solid fa-microchip"></i><span>ICE Analytics</span>
+            </div>
+
+            <div class="future-section">
+                <h4><i class="fas fa-microchip"></i> EM BREVE</h4>
+                <div class="nav-item muted"><i class="fas fa-chart-simple"></i><span>Gráficos Avançados</span></div>
+                <div class="nav-item muted"><i class="fas fa-users"></i><span>Simulação de Jogadores</span></div>
+                <div class="nav-item muted"><i class="fas fa-brain"></i><span>Previsões IA</span></div>
+            </div>
+        </nav>
+    </aside>
+
+    <main class="main-content dashboard-page">
+        <header class="dashboard-header">
+            <div class="team-info">
+                <div class="page-kicker"><i class="fas fa-chart-line"></i> VISÃO GERAL</div>
+                <h1 id="team-name">Joinville EC</h1>
+                <div class="team-meta">
+                    <span><i class="fas fa-trophy"></i> Campeonato Catarinense</span>
+                    <span><i class="fas fa-map-marker-alt"></i> Santa Catarina, Brasil</span>
+                    <span><i class="fas fa-calendar"></i> Temporada 2026</span>
+                </div>
+            </div>
+            <div class="dashboard-status">
+                <span class="status-dot"></span>
+                <span id="data-status">Carregando dados</span>
+            </div>
+        </header>
+
+        <section class="dashboard-kpis">
+            <article class="dashboard-kpi ice-kpi">
+                <div class="kpi-heading"><span>ICE MÉDIO</span><i class="fas fa-microchip"></i></div>
+                <div class="kpi-number"><span id="ice-medio">--</span><small>/100</small></div>
+                <p>Índice de Compatibilidade e Entrosamento</p>
+            </article>
+
+            <article class="dashboard-kpi">
+                <div class="kpi-heading"><span>CAMPANHA</span><i class="fas fa-flag"></i></div>
+                <div class="kpi-number campaign-number" id="campanha">--</div>
+                <p id="record-stats">Últimos jogos</p>
+            </article>
+
+            <article class="dashboard-kpi">
+                <div class="kpi-heading"><span>GOLS MARCADOS</span><i class="fas fa-futbol"></i></div>
+                <div class="kpi-number"><span id="media-gols">--</span><small>/jogo</small></div>
+                <p>Produção ofensiva</p>
+            </article>
+
+            <article class="dashboard-kpi">
+                <div class="kpi-heading"><span>GOLS SOFRIDOS</span><i class="fas fa-shield-halved"></i></div>
+                <div class="kpi-number"><span id="media-sofridos">--</span><small>/jogo</small></div>
+                <p>Solidez defensiva</p>
+            </article>
+
+            <article class="dashboard-kpi">
+                <div class="kpi-heading"><span>POSSE MÉDIA</span><i class="fas fa-chart-simple"></i></div>
+                <div class="kpi-number"><span id="media-posse">--</span><small>%</small></div>
+                <p>Controle de jogo</p>
+            </article>
+        </section>
+
+        <section class="dashboard-section form-section">
+            <div class="section-heading">
+                <div>
+                    <span class="section-kicker">FORMA RECENTE</span>
+                    <h2>Momento do Joinville</h2>
+                </div>
+                <span class="section-caption">Últimos 10 jogos</span>
+            </div>
+            <div id="form-container" class="form-container">
+                <div class="dashboard-loading"><i class="fas fa-spinner fa-pulse"></i> Carregando desempenho...</div>
+            </div>
+        </section>
+
+        <section class="dashboard-analysis-grid">
+            <article class="dashboard-panel chart-panel">
+                <div class="panel-header">
+                    <div><span>DESEMPENHO</span><h3>Evolução do ICE</h3></div>
+                    <i class="fas fa-chart-line"></i>
+                </div>
+                <div class="chart-wrapper"><canvas id="ice-chart"></canvas></div>
+            </article>
+
+            <article class="dashboard-panel">
+                <div class="panel-header">
+                    <div><span>ATAQUE</span><h3>Produção ofensiva</h3></div>
+                    <i class="fas fa-bullseye"></i>
+                </div>
+                <div class="metric-list">
+                    <div class="metric-row"><span>Finalizações</span><strong id="media-finalizacoes">--</strong></div>
+                    <div class="metric-row"><span>No alvo</span><strong id="media-no-alvo">--</strong></div>
+                    <div class="metric-row"><span>xG</span><strong id="media-xg">--</strong></div>
+                    <div class="metric-row"><span>Chances criadas</span><strong id="media-chances">--</strong></div>
+                </div>
+            </article>
+
+            <article class="dashboard-panel">
+                <div class="panel-header">
+                    <div><span>DEFESA</span><h3>Organização defensiva</h3></div>
+                    <i class="fas fa-shield-halved"></i>
+                </div>
+                <div class="metric-list">
+                    <div class="metric-row"><span>Gols sofridos</span><strong id="defesa-sofridos">--</strong></div>
+                    <div class="metric-row"><span>Desarmes</span><strong id="media-desarmes">--</strong></div>
+                    <div class="metric-row"><span>Interceptações</span><strong id="media-interceptacoes">--</strong></div>
+                </div>
+            </article>
+
+            <article class="dashboard-panel">
+                <div class="panel-header">
+                    <div><span>CONSTRUÇÃO</span><h3>Controle de jogo</h3></div>
+                    <i class="fas fa-arrows-left-right"></i>
+                </div>
+                <div class="metric-list">
+                    <div class="metric-row"><span>Posse média</span><strong id="controle-posse">--</strong></div>
+                    <div class="metric-row"><span>Passes certos</span><strong id="passes-certos">--</strong></div>
+                    <div class="metric-row"><span>Assistências</span><strong id="media-assistencias">--</strong></div>
+                </div>
+            </article>
+        </section>
+
+        <section class="dashboard-section insights-section">
+            <div class="section-heading">
+                <div><span class="section-kicker">LEITURA DOS DADOS</span><h2>Pontos de atenção</h2></div>
+                <span class="section-caption">Baseado nos últimos jogos</span>
+            </div>
+            <div id="insights-container" class="insights-grid">
+                <div class="dashboard-loading"><i class="fas fa-spinner fa-pulse"></i> Analisando desempenho...</div>
+            </div>
+        </section>
+
+        <section class="dashboard-footer-link">
+            <span>Quer analisar cada partida?</span>
+            <button onclick="window.location.href='jogo.html'">Ir para Jogos <i class="fas fa-arrow-right"></i></button>
+        </section>
+    </main>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="assets/js/dashboard.js" defer></script>
 </body>
 </html>
